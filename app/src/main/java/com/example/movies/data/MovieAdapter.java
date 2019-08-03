@@ -17,7 +17,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder> {
     private ArrayList<Movie> movies;
     private Context context;
     private MovieHolder movieHolder;
@@ -29,22 +29,23 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MovieAdapter.MovieHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.movie_item, parent, false);
         return new MovieHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MovieAdapter.MovieHolder holder, int position) {
         Movie currentMovie = movies.get(position);
 
         String title = currentMovie.getTitle();
-        String year = currentMovie.getTitle();
-        String posterUrl = currentMovie.getTitle();
+        String year = currentMovie.getYear();
+        String posterUrl = currentMovie.getPosterUrl();
 
-        movieHolder.yearTexteView.setText(year);
-        movieHolder.titleTexteView.setText(title);
-        Picasso.get().load(posterUrl).into(movieHolder.posterImageView);
+
+        holder.yearTexteView.setText(year);
+        holder.titleTexteView.setText(title);
+        Picasso.get().load(posterUrl).into(holder.posterImageView);
     }
 
     @Override
@@ -56,7 +57,6 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         ImageView posterImageView;
         TextView titleTexteView;
         TextView yearTexteView;
-
 
         public MovieHolder(@NonNull View itemView) {
             super(itemView);

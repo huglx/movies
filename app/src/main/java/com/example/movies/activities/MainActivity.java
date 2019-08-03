@@ -41,13 +41,16 @@ public class MainActivity extends AppCompatActivity {
         mainRV.hasFixedSize();
         mainRV.setLayoutManager(new LinearLayoutManager(this));
         movies = new ArrayList<>();
+
         queue = Volley.newRequestQueue(this);
         Log.i("json", "ds");
-        getMoview();
+        movieAdapter = new MovieAdapter(movies = new ArrayList<>(), this);
+        mainRV.setAdapter(movieAdapter);
+        getMovie();
     }
 
-    private void getMoview() {
-        String url = "http://www.omdbapi.com/?&apikey=6b7e0e6f&s=Rocky";
+    private void getMovie() {
+        String url = "http://www.omdbapi.com/?&apikey=6b7e0e6f&s=Superman";
         Log.i("json", "ds");
 
         JsonObjectRequest request = new JsonObjectRequest
@@ -55,13 +58,35 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.i("json", "onResponse: ");
+                        try {
+                            JSONArray jsonArray = response.getJSONArray("Search");
+                            Log.i("json", "ds");
+                            for(int i = 0; i<jsonArray.length(); i++){
+                                JSONObject jsonObject =jsonArray.getJSONObject(i);
+
+                                String title = jsonObject.getString("Title");
+                                String year = jsonObject.getString("Year");
+
+                                String posterUrl = jsonObject.getString("Poster");
+                                Movie movie = new Movie();
+                                movie.setPosterUrl(posterUrl);
+                                movie.setTitle(title);
+                                movie.setYear(year);
+                                movies.add(movie);
+                                Log.i("json2321", movie.getYear());
+                            }
+                            movieAdapter = new MovieAdapter(movies, MainActivity.this);
+                            mainRV.setAdapter(movieAdapter);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }, new Response.ErrorListener() {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // TODO: Handle error
+                        error.printStackTrace();
 
                     }
                 });
