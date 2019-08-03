@@ -1,13 +1,15 @@
 package com.example.movies.activities;
 
+import android.graphics.Color;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Context;
-import android.os.Bundle;
-import android.text.method.MovementMethod;
-import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -18,24 +20,35 @@ import com.android.volley.toolbox.Volley;
 import com.example.movies.R;
 import com.example.movies.data.MovieAdapter;
 import com.example.movies.model.Movie;
+import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
+
+
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView mainRV;
     private MovieAdapter movieAdapter;
     private ArrayList<Movie> movies;
     private RequestQueue queue;
+    MaterialSearchView materialSearchView;
+    String search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Toolbar toolbar =  findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Material search");
+        toolbar.setTitleTextColor(Color.parseColor("#FFFFFF"));
+        materialSearchView = findViewById(R.id.search_view);
+
+
 
         mainRV= findViewById(R.id.recyclerViewMain);
         mainRV.hasFixedSize();
@@ -46,11 +59,45 @@ public class MainActivity extends AppCompatActivity {
         Log.i("json", "ds");
         movieAdapter = new MovieAdapter(movies = new ArrayList<>(), this);
         mainRV.setAdapter(movieAdapter);
-        getMovie();
+        materialSearchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
+            @Override
+            public void onSearchViewShown() {
+
+            }
+
+            @Override
+            public void onSearchViewClosed() {
+
+            }
+        });
+        materialSearchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                if(query!=null && !query.isEmpty()){
+                    search = query;
+                    getMovie(search);
+                    query = "";
+                }
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                /*if(newText!=null && !newText.isEmpty()){
+                    search = newText;
+                    getMovie(search);
+                }
+                return true;
+                */
+                return false;
+            }
+        });
+
     }
 
-    private void getMovie() {
-        String url = "http://www.omdbapi.com/?&apikey=6b7e0e6f&s=Superman";
+    private void getMovie(String search) {
+        String url = "http://www.omdbapi.com/?&apikey=6b7e0e6f&s="+ search;
+
         Log.i("json", "ds");
 
         JsonObjectRequest request = new JsonObjectRequest
@@ -125,5 +172,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });*/
         queue.add(request);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_items, menu);
+        MenuItem item = menu.findItem(R.id.action_search);
+        materialSearchView.setMenuItem(item);
+        return true;
     }
 }
