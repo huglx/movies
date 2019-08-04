@@ -5,26 +5,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="8dp"
     app:cardCornerRadius="8dp">
+
     <LinearLayout
-        android:padding="16dp"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="32dp">
+
         <ImageView
+            android:id="@+id/posterImageView"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:id="@+id/posterImageView"
-            android:src="@mipmap/ic_launcher_round"/>
+            android:src="@mipmap/ic_launcher_round" />
+
         <TextView
-            android:text="ddg"
+            android:id="@+id/titleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/titleTextView"/>
+            android:text="ddg" />
+
         <TextView
-            android:text="ddg2"
+            android:id="@+id/yearTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/yearTextView"/>
+            android:text="ddg2" />
 
 
     </LinearLayout>

@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Material search");
-        toolbar.setTitleTextColor(Color.parseColor("#FFFFFF"));
+        toolbar.setTitleTextColor(Color.parseColor("#E2E3E5"));
         materialSearchView = findViewById(R.id.search_view);
 
 
@@ -97,8 +97,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void getMovie(String search) {
         String url = "http://www.omdbapi.com/?&apikey=6b7e0e6f&s="+ search;
-
-        Log.i("json", "ds");
+        if(!movies.isEmpty())
+            movies.clear();
 
         JsonObjectRequest request = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
