@@ -113,14 +113,15 @@ public class MainActivity extends AppCompatActivity {
 
                                 String title = jsonObject.getString("Title");
                                 String year = jsonObject.getString("Year");
-
+                                String ImdbID = jsonObject.getString("imdbID");
                                 String posterUrl = jsonObject.getString("Poster");
                                 Movie movie = new Movie();
+                                movie.setImdbID(ImdbID);
                                 movie.setPosterUrl(posterUrl);
                                 movie.setTitle(title);
                                 movie.setYear(year);
                                 movies.add(movie);
-                                Log.i("json2321", movie.getYear());
+                                Log.i("json2321", movie.getImdbID());
                             }
                             movieAdapter = new MovieAdapter(movies, MainActivity.this);
                             mainRV.setAdapter(movieAdapter);
