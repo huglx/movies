@@ -55,11 +55,18 @@ public class DescriptionActivity extends AppCompatActivity {
                         try {
                             //JSONObject jsonObject = response.getJSONObject("");
                             Log.i("json4141", response.toString());
-                            String genre = response.getString("Genre");
                             Movie.Additional additional = new Movie.Additional();
-                            additional.setGenre(genre);
+                            Movie movie = new Movie();
+                            movie.setTitle(response.getString("Title"));
+                            movie.setYear(response.getString("Year"));
+                            additional.setGenre(response.getString("Genre"));
+                            additional.setDirector(response.getString("Director"));
+                            additional.setPlot(response.getString("Plot"));
+
+                            additional.setRuntime(response.getString("Runtime"));
+
                             Log.i("json4141", additional.getGenre());
-                            setContent(additional);
+                            setContent(additional, movie);
 
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -69,7 +76,7 @@ public class DescriptionActivity extends AppCompatActivity {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // TODO: Handle error
+                        //  Handle error
                         error.printStackTrace();
 
                     }
@@ -78,8 +85,20 @@ public class DescriptionActivity extends AppCompatActivity {
 
     }
 
-    public void setContent(Movie.Additional additional){
-        TextView genre = findViewById(R.id.textView);
+    public void setContent(Movie.Additional additional, Movie movie){
+        TextView title = findViewById(R.id.titleTextView);
+        TextView year = findViewById(R.id.yearTextView);
+        TextView genre = findViewById(R.id.genreTextView);
+        TextView director = findViewById(R.id.directorTextView);
+        TextView runtime = findViewById(R.id.runtimeTextView);
+        TextView plot = findViewById(R.id.plotTextView);
+
+
         genre.setText(additional.getGenre());
+        title.setText(movie.getTitle());
+        year.setText(movie.getYear());
+        director.setText(additional.getDirector());
+        runtime.setText(additional.getRuntime());
+        plot.setText(additional.getPlot());
     }
 }

@@ -28,7 +28,11 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-
+/*
+TODO: write code explanation
+TODO: edit strings.xml: add strings for whole app
+todo: end description activity
+*/
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView mainRV;
@@ -133,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // TODO: Handle error
+                        //  Handle error
                         error.printStackTrace();
 
                     }

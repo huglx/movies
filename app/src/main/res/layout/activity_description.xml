@@ -5,10 +5,48 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.DescriptionActivity">
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_margin="8dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/titleTextView"
+            android:text="@string/app_name"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/yearTextView"
+            android:text="@string/app_name"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TextView"
+            android:text="@string/app_name"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/genreTextView"
+            android:text="@string/app_name"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/directorTextView"
+            android:text="@string/app_name"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/plotTextView"
+            android:text="@string/app_name"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/runtimeTextView"
+            android:text="@string/app_name"/>
+    </LinearLayout>
+
+
 </RelativeLayout>

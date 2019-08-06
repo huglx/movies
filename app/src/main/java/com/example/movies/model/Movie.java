@@ -52,13 +52,13 @@ public class Movie {
         private String Genre;
         private String Director;
         private String Plot;
-        private String Awards;
+        private String Runtime;
 
         public Additional(String genre, String director, String plot, String awards) {
             Genre = genre;
             Director = director;
             Plot = plot;
-            Awards = awards;
+            Runtime = awards;
         }
 
         public String getGenre() {
@@ -85,12 +85,12 @@ public class Movie {
             Plot = plot;
         }
 
-        public String getAwards() {
-            return Awards;
+        public String getRuntime() {
+            return Runtime;
         }
 
-        public void setAwards(String awards) {
-            Awards = awards;
+        public void setRuntime(String runtime) {
+            Runtime = runtime;
         }
 
         public Additional() {
